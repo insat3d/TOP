@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="logic.js" defer></script>
+    <title>RPS v2</title>
+  </head>
+  <body>
+    <header>Rock Paper Scissors</header>
+    <main>
+      <div class="container">
+        <div class="inputs">
+          <div class="card" data-card="Rock">
+            <input class="img" type="image" src="rock.png" alt="rock" />
+          </div>
+          <div class="card" data-card="Paper">
+            <input class="img" type="image" src="paper.png" alt="paper" />
+          </div>
+          <div class="card" data-card="Scissors">
+            <input class="img" type="image" src="scissors.png" alt="scissors" />
+          </div>
+        </div>
+        <div class="instructions">Click on one of the images above to play</div>
+        <div class="scorecard">
+          <div class="scoreDiv">
+            Player
+            <div class="playerScore scoreNumber">0</div>
+          </div>
+          <div class="result"></div>
+          <div class="scoreDiv">
+            Computer
+            <div class="compScore scoreNumber">0</div>
+          </div>
+        </div>
+        <div class="reset">
+          <button id="btnReset" type="reset">Restart Game</button>
+        </div>
+        <div class="messageBox"></div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Quantico:wght@400;700&display=swap');
+
+:root {
+  --bgcolor: #f1ff00;
+  --headerFont: 'Quantico', sans-serif;
+  --bodyFont: 'Lato', sans-serif;
+}
+
+body {
+  background-color: var(--bgcolor);
+  font-family: var(--bodyFont);
+}
+
+header {
+  font-family: var(--headerFont);
+  font-size: 4rem;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+input:focus {
+  outline: none;
+}
+
+.inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 275px);
+  grid-template-rows: auto;
+  gap: 5px;
+}
+
+.card {
+  border: 1px solid grey;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 20px;
+  position: relative;
+}
+
+.instructions {
+  padding: 10px;
+  font-size: small;
+  display: flex;
+  justify-content: center;
+  color: grey;
+}
+
+[data-card]:before {
+  position: absolute;
+  left: auto;
+  bottom: 5px;
+  content: attr(data-card);
+  opacity: 0;
+}
+
+[data-card]:hover:before {
+  opacity: 1;
+}
+
+.messageBox {
+  white-space: pre-line;
+  font-size: small;
+  color: grey;
+}
+
+.scorecard {
+  font-size: 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: auto;
+  padding: 5px;
+}
+
+.scorecard > .scoreDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-transform: uppercase;
+}
+
+.scoreNumber {
+  font-size: 2rem;
+}
+
+.reset {
+  display: flex;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+#btnReset {
+  border: none;
+  margin: 0;
+  padding: 5px 20px;
+  border-radius: 4px;
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+}
