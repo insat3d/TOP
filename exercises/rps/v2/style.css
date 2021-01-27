@@ -3,7 +3,7 @@
 :root {
   --bgcolor: #f1ff00;
   --headerFont: 'Quantico', sans-serif;
-  --bodyFont: 'Lato', sans-serif;
+  --bodyFont: 'Quantico', 'Lato', sans-serif;
 }
 
 body {
@@ -17,6 +17,7 @@ header {
   text-transform: uppercase;
   display: flex;
   justify-content: center;
+  display: none;
 }
 
 main {

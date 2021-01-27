@@ -51,15 +51,21 @@ function playRound() {
 
   messageBox += `\r\n ${result}`;
 
+  document.querySelector('.result').textContent = result.includes('win')
+    ? 'You Win'
+    : result.includes('lose')
+    ? 'You lost'
+    : "It's a Tie";
+
   if (round === 5) {
-    // document.querySelector('.result').textContent = ""
     messageBox += `\r\nFinal Score: ${playerScore} : ${computerScore}\n`;
     document.querySelector('.result').textContent =
-      playerScore > computerScore
+      'Game Over: ' +
+      (playerScore > computerScore
         ? 'You won!'
         : playerScore < computerScore
         ? 'You lost.'
-        : "It's a tie!";
+        : "It's a tie!");
     removeListeners();
     document.querySelector('.reset').classList.remove('hidden');
   }

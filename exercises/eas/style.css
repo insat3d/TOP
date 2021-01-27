@@ -1,0 +1,73 @@
+:root {
+  --gridsize: 4;
+  --bgcolor: #d0d329;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  box-sizing: border-box;
+  background-color: var(--bgcolor);
+}
+
+.preserve-whitespace {
+  white-space: pre-wrap;
+}
+
+header {
+  font-family: 'Gochi Hand', cursive;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  height: 40px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.floater {
+  height: 30px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.innerFloater {
+  height: 100%;
+  width: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+}
+
+.innerFloater > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.innerFloater > .gridLabel {
+  flex: 3;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 20px;
+}
+
+#btnReset {
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 5px 5px 15px rgb(104, 104, 104);
+}
+
+.container {
+  background-color: #fff;
+  height: calc(100vh - 120px);
+  width: calc(100vh - 120px);
+  display: grid;
+  grid-template-columns: repeat(var(--gridsize), 1fr);
+  grid-template-rows: repeat(var(--gridsize), 1fr);
+}
