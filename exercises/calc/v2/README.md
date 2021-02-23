@@ -35,16 +35,19 @@
 
     1. An operator must have 2 numbers except if it is a unary operator (- or %).
     2. When I press =/result key, display the answer in dispLarge and the entire equation on dispSmall.
-    3. Only one decimal in a number.
-    4. Only one equal to in an equation.
-    5. If a malformed expression or incomplete expression is entered, show error message.
+    3. Remove leading zeros
+    4. Only one decimal in a number.
+    5. Only one equal to in an equation.
+    6. If a malformed expression or incomplete expression is entered, show error message.
        1. Error cases: stray decimal e.g. "10."
        2. Divide by zero
        3. Operator without 2 numbers
 
-## Concepts Learned
+## Concepts Learned/Used
 
+- Regex
 - Data attributes
+- Using external library (decimal.js)
 - Closest (DOM manipulation)
 - Using inline SVG
 - Using jest to test
