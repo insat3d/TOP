@@ -1,0 +1,109 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 500px;
+  background-color: lightgray;
+}
+
+header {
+  font-size: 3rem;
+  padding: 20px;
+  display: none;
+}
+
+.container {
+  border: 3px double red;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+}
+
+.display-container {
+  border: 2px solid gray;
+  background-color: gray;
+  width: 100%;
+  padding: 5px 20px;
+  box-sizing: border-box;
+  text-align: end;
+}
+
+#display-small {
+  font-size: 1.5rem;
+  min-height: 2rem;
+}
+
+#display-large {
+  font-size: 2.5rem;
+  min-height: 3rem;
+}
+
+/* ....All buttons.... */
+
+.keys {
+  padding: 5px 20px;
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(4, 1fr);
+  /* gap: 5px; */
+}
+
+.keys > * {
+  /* border: 1px solid blue; */
+}
+
+.btn {
+  padding: 3px;
+  margin: 3px;
+  font-size: 2rem;
+
+  border: none;
+  border-radius: 5px;
+}
+
+/* ....Top row - reset and clear.... */
+.keys-reset {
+  grid-column: 1/5;
+  grid-row: 1/2;
+
+  display: grid;
+  grid-template: 1fr / repeat(4, 1fr);
+}
+
+#btn-clear {
+  grid-column: 3/4;
+}
+
+#btn-backspace {
+  grid-column: 4/5;
+}
+
+/* ....Operators.... */
+
+.keys-operator {
+  grid-column: 4/5;
+  grid-row: 2/6;
+
+  display: grid;
+  grid-template: repeat(4, 1fr) / 1fr;
+}
+
+/* ....Number keys.... */
+
+.keys-number {
+  grid-column: 1/4;
+  grid-row: 2/6;
+
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(3, 1fr);
+}
+
+/* Message box */
+#message-box {
+  color: #808080;
+  text-align: center;
+  padding: 10px 4px;
+}

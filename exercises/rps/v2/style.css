@@ -23,6 +23,7 @@ header {
 main {
   display: flex;
   justify-content: center;
+  padding-top: 50px;
 }
 
 input:focus {
@@ -31,13 +32,13 @@ input:focus {
 
 .inputs {
   display: grid;
-  grid-template-columns: repeat(3, 275px);
+  grid-template-columns: repeat(3, 300px);
   grid-template-rows: auto;
-  gap: 5px;
+  gap: 20px;
 }
 
 .card {
-  border: 1px solid grey;
+  border: 1px solid rgb(255, 174, 0);
   width: 100%;
   height: 100%;
   display: flex;
@@ -46,6 +47,7 @@ input:focus {
   cursor: pointer;
   border-radius: 20px;
   position: relative;
+  box-shadow: 0px 10px 10px rgb(255, 174, 0), 0px -10px 10px rgb(255, 174, 0);
 }
 
 .instructions {
@@ -59,19 +61,21 @@ input:focus {
 [data-card]:before {
   position: absolute;
   left: auto;
-  bottom: 5px;
+  bottom: 2px;
   content: attr(data-card);
-  opacity: 0;
+  opacity: 1;
+  font-size: 2rem;
 }
 
-[data-card]:hover:before {
+/* [data-card]:hover:before {
   opacity: 1;
-}
+} */
 
 .messageBox {
   white-space: pre-line;
-  font-size: small;
+  font-size: 0.8rem;
   color: grey;
+  border: 1px solid red;
 }
 
 .scorecard {
@@ -108,6 +112,7 @@ input:focus {
   margin: 0;
   padding: 5px 20px;
   border-radius: 4px;
+  box-shadow: 0px 10px 10px rgb(255, 174, 0);
 }
 
 .result {

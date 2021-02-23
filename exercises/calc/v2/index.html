@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="scripts/helper/decimal.js"></script>
+    <!-- <script src="scripts/calc.js" defer></script> -->
+    <script src="scripts/calc-main.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="calc-frame">
+        <div id="calc-header">
+          <div id="app-name-box">
+            <div id="app-name">Calculator</div>
+          </div>
+          <!-- <div id="mode">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="19.368"
+              height="19.368"
+              viewBox="0 0 19.368 19.368"
+              id="dark-mode"
+            >
+              <defs>
+              </defs>
+              <path
+                class="a"
+                d="M12.855,2.25H11.009V5.017h1.846V2.25Zm5.581,1.889L16.776,5.8l1.293,1.293,1.66-1.66L18.436,4.139Zm-13,0L4.139,5.432,5.8,7.092,7.092,5.8l-1.66-1.66Zm6.5,2.261a5.534,5.534,0,1,0,5.534,5.534A5.55,5.55,0,0,0,11.934,6.4Zm9.684,4.613H18.851v1.846h2.767V11.013Zm-16.6,0H2.25v1.846H5.017V11.013Zm13.051,5.763-1.293,1.293,1.66,1.66,1.293-1.293-1.66-1.66Zm-12.269,0-1.66,1.66,1.293,1.293,1.66-1.66L5.8,16.776Zm7.055,2.075H11.009v2.767h1.846V18.851Z"
+                transform="translate(-2.25 -2.25)"
+              />
+            </svg>
+          </div> -->
+        </div>
+        <div id="calc-display">
+          <div class="displayLines">
+            <div class="display dispSmall"></div>
+            <div class="display dispLarge">0</div>
+            <div id="snackbar"></div>
+          </div>
+        </div>
+        <div id="key-grid">
+          <div class="btn btn-circle btn-light btn-top-row" id="all-clear">
+            <span> AC</span>
+          </div>
+          <div class="btn btn-circle btn-light btn-top-row" id="backspace">
+            <span> C</span>
+          </div>
+          <div class="btn btn-circle btn-light btn-top-row" id="plus-minus">
+            <svg
+              version="1.1"
+              class="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 141.293 141.293"
+              xml:space="preserve"
+            >
+              <g>
+                <g>
+                  <path
+                    d="M77.955,109.975c-4.037,0-7.309,3.271-7.309,7.308c0,4.037,3.272,7.31,7.309,7.31h56.029c4.037,0,7.309-3.271,7.309-7.31
+                 c0-4.036-3.271-7.308-7.309-7.308H77.955z"
+                  />
+                  <path
+                    d="M0,44.2c0,4.037,3.272,7.308,7.309,7.308h19.489v19.49c0,4.036,3.271,7.309,7.308,7.309c4.037,0,7.309-3.271,7.309-7.309
+                 v-19.49H63.34c4.037,0,7.308-3.271,7.308-7.308c0-4.037-3.271-7.309-7.308-7.309H41.414V12.53c0-4.037-3.272-7.308-7.309-7.308
+                 c-4.037,0-7.308,3.271-7.308,7.308v24.361H7.308C3.272,36.892,0,40.164,0,44.2z"
+                  />
+                  <path
+                    d="M131.428,17.261c-2.854-2.855-7.481-2.855-10.336,0L14.763,123.594c-2.853,2.854-2.853,7.481,0,10.334
+                 c1.425,1.429,3.298,2.143,5.167,2.143c1.868,0,3.742-0.714,5.169-2.143L131.428,27.599
+                 C134.283,24.746,134.283,20.114,131.428,17.261z"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div
+            class="btn btn-circle btn-light btn-top-row btn-numopr"
+            data-opr="%"
+            id="btn-percentage"
+          >
+            <!-- <span> -->
+            <svg
+              version="1.1"
+              class="Capa_1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 320.648 320.648"
+              style="enable-background: new 0 0 320.648 320.648"
+              xml:space="preserve"
+            >
+              <g>
+                <g id="Layer_5_90_">
+                  <g>
+                    <path
+                      d="M139.219,124.494c12.369-13.416,19.184-31.412,19.184-50.678C158.403,37.134,132.202,0,82.116,0
+                   C58.807,0,39.143,8.006,25.247,23.152C12.938,36.57,6.161,54.562,6.161,73.816c0,36.686,26.09,73.818,75.955,73.818
+                   C105.512,147.635,125.262,139.635,139.219,124.494z M82.116,34.322c27.443,0,39.941,20.486,39.941,39.52
+                   c0,10.354-3.484,19.939-9.816,26.986c-7.064,7.871-17.33,12.033-29.68,12.033c-28.137,0-40.955-20.484-40.955-39.516
+                   C41.606,53.924,54.134,34.322,82.116,34.322z"
+                    />
+                    <path
+                      d="M264.274,28.476c-4.539,0.082-10.736,2.912-13.772,6.287L25.186,285.275c-3.035,3.377-0.885,8.111,3.654,8.111h29.49
+                   c4.539,0,10.73-2.768,13.76-6.148L296.013,36.777c3.029-3.383,2.828-8.887-4.672-8.885L264.274,28.476z"
+                    />
+                    <path
+                      d="M239.647,175.822c-22.859,0-42.15,7.858-55.783,22.715c-12.074,13.158-18.726,30.811-18.726,49.699
+                   c0,35.984,25.594,72.412,74.51,72.412c22.957,0,42.326-7.85,56.02-22.701c12.135-13.162,18.818-30.816,18.818-49.711
+                   C314.485,212.252,288.78,175.822,239.647,175.822z M240.089,287.418c-27.375,0-39.848-20.557-39.848-39.648
+                   c0-10.397,3.482-20.018,9.809-27.092c7.053-7.894,17.287-12.066,29.598-12.066c27.377,0,39.844,20.553,39.844,39.65
+                   c0,10.395-3.483,20.018-9.805,27.092C262.632,283.246,252.397,287.418,240.089,287.418z"
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+            <!-- </span> -->
+          </div>
+          <div class="num-keys">
+            <div class="btn btn-dark btn-num btn-numopr" data-num="7">
+              <span>7</span>
+            </div>
+            <div class="btn btn-dark btn-num btn-numopr" data-num="8">
+              <span>8</span>
+            </div>
+            <div class="btn btn-dark btn-num btn-numopr" data-num="9">
+              <span>9</span>
+            </div>
+
+            <div class="btn btn-dark btn-num btn-numopr" data-num="4">
+              <span>4</span>
+            </div>
+            <div class="btn btn-dark btn-num btn-numopr" data-num="5">
+              <span>5</span>
+            </div>
+            <div class="btn btn-dark btn-num btn-numopr" data-num="6">
+              <span>6</span>
+            </div>
+
+            <div class="btn btn-dark btn-num btn-numopr" data-num="1">
+              <span>1</span>
+            </div>
+            <div class="btn btn-dark btn-num btn-numopr" data-num="2">
+              <span>2</span>
+            </div>
+            <div class="btn btn-dark btn-num btn-numopr" data-num="3">
+              <span>3</span>
+            </div>
+
+            <div class="btn btn-dark btn-num btn-numopr" data-num="0">
+              <span>0</span>
+            </div>
+            <div class="btn btn-dark btn-num btn-numopr" data-num=".">
+              <span id="btn-decimal">.</span>
+            </div>
+            <div class="btn btn-circle btn-numopr" id="btn-result" data-opr="=">
+              <span>
+                <svg
+                  version="1.1"
+                  class="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 121.805 121.805"
+                  style="enable-background: new 0 0 121.805 121.805"
+                  xml:space="preserve"
+                >
+                  <g>
+                    <g>
+                      <path
+                        d="M7.308,85.264h107.188c4.037,0,7.309-3.271,7.309-7.31s-3.271-7.309-7.309-7.309H7.308C3.271,70.646,0,73.916,0,77.954
+                   S3.271,85.264,7.308,85.264z"
+                      />
+                      <path
+                        d="M7.308,51.158h107.188c4.037,0,7.309-3.272,7.309-7.309c0-4.037-3.271-7.308-7.309-7.308H7.308
+                   C3.271,36.541,0,39.812,0,43.849C0,47.886,3.271,51.158,7.308,51.158z"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="opr-keys">
+            <div
+              class="btn btn-circle btn-light btn-opr btn-numopr"
+              id="divide"
+              data-opr="/"
+            >
+              <span>
+                <svg
+                  version="1.1"
+                  class="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 42 42"
+                  style="enable-background: new 0 0 42 42"
+                  xml:space="preserve"
+                >
+                  <g>
+                    <rect y="19" width="42" height="4" />
+                    <path
+                      d="M21,13c2.757,0,5-2.243,5-5s-2.243-5-5-5s-5,2.243-5,5S18.243,13,21,13z"
+                    />
+                    <path
+                      d="M21,29c-2.757,0-5,2.243-5,5s2.243,5,5,5s5-2.243,5-5S23.757,29,21,29z"
+                    />
+                  </g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg>
+              </span>
+            </div>
+            <div
+              class="btn btn-circle btn-light btn-opr btn-numopr"
+              id="multiply"
+              data-opr="x"
+            >
+              <span>
+                <svg
+                  viewBox="0 0 329.26933 329"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="Capa_1"
+                >
+                  <path
+                    d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"
+                  />
+                </svg>
+              </span>
+            </div>
+            <div
+              class="btn btn-circle btn-light btn-opr btn-numopr"
+              id="minus"
+              data-opr="-"
+            >
+              <span>
+                <svg
+                  version="1.1"
+                  class="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 121.805 121.804"
+                  style="enable-background: new 0 0 121.805 121.804"
+                  xml:space="preserve"
+                >
+                  <g>
+                    <g>
+                      <path
+                        d="M7.308,68.211h107.188c4.037,0,7.309-3.272,7.309-7.31c0-4.037-3.271-7.309-7.309-7.309H7.308
+                   C3.272,53.593,0,56.865,0,60.902C0,64.939,3.272,68.211,7.308,68.211z"
+                      />
+                    </g>
+                  </g>
+                </svg>
+              </span>
+            </div>
+            <div
+              class="btn btn-circle btn-light btn-opr btn-numopr"
+              id="plus"
+              data-opr="+"
+            >
+              <span>
+                <svg
+                  version="1.1"
+                  class="Capa_1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  viewBox="0 0 93.562 93.562"
+                  style="enable-background: new 0 0 93.562 93.562"
+                  xml:space="preserve"
+                >
+                  <g>
+                    <path
+                      d="M87.952,41.17l-36.386,0.11V5.61c0-3.108-2.502-5.61-5.61-5.61c-3.107,0-5.61,2.502-5.61,5.61l0.11,35.561H5.61
+                 c-3.108,0-5.61,2.502-5.61,5.61c0,3.107,2.502,5.609,5.61,5.609h34.791v35.562c0,3.106,2.502,5.61,5.61,5.61
+                 c3.108,0,5.61-2.504,5.61-5.61V52.391h36.331c3.108,0,5.61-2.504,5.61-5.61C93.562,43.672,91.032,41.17,87.952,41.17z"
+                    />
+                  </g>
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+/* ! -------------------------------------------
+    * Body
+ ! ------------------------------------------- */
+
+body {
+  background-image: url('assets/background.svg');
+  height: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body > * {
+  /* Disable user selections */
+  user-select: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+}
+
+@media only screen and (min-width: 1300px) {
+  body {
+    background-size: cover;
+  }
+}
+
+/* ! -------------------------------------------
+    * Calculator Frame
+ ! ------------------------------------------- */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#calc-frame {
+  top: 51px;
+  left: 501px;
+  width: 364px;
+  height: 666px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 14px #00000029;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+/* ! -------------------------------------------
+    * Calculator Header
+ ! ------------------------------------------- */
+
+#calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 364px;
+  height: 50px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  opacity: 1;
+
+  box-sizing: border-box;
+  padding: 0px 24px;
+}
+
+#app-name-box {
+  width: 105px;
+  height: 28px;
+  background: #4f79dc 0% 0% no-repeat padding-box;
+  border-radius: 14px;
+  opacity: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#dark-mode > .a {
+  fill: #8c8c8c;
+  stroke: none;
+}
+
+#app-name {
+  width: 73px;
+  height: 19px;
+  text-align: left;
+  font: normal normal normal 16px/19px Lato;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+}
+
+/* ! -------------------------------------------
+    * Calculator Display
+ ! ------------------------------------------- */
+#calc-display {
+  width: 364px;
+  height: 170px;
+  background: #ececec 0% 0% no-repeat padding-box;
+  border-radius: 4px 4px 0px 0px;
+  opacity: 1;
+}
+
+.displayLines {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-end;
+
+  padding: 24px 24px;
+  box-sizing: border-box;
+}
+
+.dispLarge {
+  height: 72px;
+  text-align: left;
+  font: normal normal normal 60px/72px Lato;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+  /* padding-bottom: 12px; */
+}
+
+.dispSmall {
+  height: 29px;
+  text-align: left;
+  font: normal normal normal 24px/32px Lato;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+  padding-bottom: 12px;
+}
+
+/* ! -------------------------------------------
+    * Pop up Toast/Snackbar Message box
+ ! ------------------------------------------- */
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: #333; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 10px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+/* ! -------------------------------------------
+    * Calculator Keys/Buttons - All keys
+ ! ------------------------------------------- */
+.btn {
+  border-radius: 50%;
+  user-select: none;
+  -khtml-user-select: none;
+  -o-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+
+  display: inline-block;
+  white-space: nowrap;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  text-decoration: none;
+
+  /* color: #333; */
+  background-color: #fff;
+  border-color: #ccc;
+}
+
+.btn-dark > span {
+  width: 20px;
+  height: 41px;
+  text-align: left;
+  font: normal normal normal 34px/41px Lato;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+}
+
+.btn-light > span {
+  /* width: 22px; */
+  height: 34px;
+  text-align: left;
+  font: normal normal normal 28px/34px Lato;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+}
+
+/* ! -------------------------------------------
+    * Calculator Keys/Buttons - Top row only
+ ! ------------------------------------------- */
+
+.btn-top-row {
+  width: 64px;
+  height: 64px;
+  background: #d2d2d2 0% 0% no-repeat padding-box;
+  opacity: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-top-row > span {
+  text-align: left;
+  font: normal normal normal 30px/36px Lato;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  line-height: 2rem;
+}
+
+/* ! -------------------------------------------
+    * Calculator Keys/Buttons - Operators and Numbers
+ ! ------------------------------------------- */
+.btn-opr {
+  width: 64px;
+  height: 64px;
+  background: #b9d6e3 0% 0% no-repeat padding-box;
+  opacity: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-opr > span {
+  width: 23px;
+  height: 48px;
+  text-align: left;
+  font: normal normal normal 40px/48px Lato;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  padding-right: 2px;
+}
+
+.btn-num {
+  width: 64px;
+  height: 64px;
+  background: #fff 0% 0% no-repeat padding-box;
+  opacity: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-num > span {
+  width: 20px;
+  height: 41px;
+  text-align: center;
+  font: normal normal normal 34px/41px Lato;
+  letter-spacing: 0px;
+  color: #707070;
+  opacity: 1;
+}
+
+/* ! -------------------------------------------
+    * Calculator Keys/Buttons - Special keys
+ ! ------------------------------------------- */
+#btn-result {
+  width: 64px;
+  height: 64px;
+  background: #4f79dc 0% 0% no-repeat padding-box;
+  opacity: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#btn-decimal {
+  padding-bottom: 20px;
+  /* padding-left: 12px; */
+}
+
+.Capa_1 {
+  /* SVG Icons */
+  fill: #fff;
+  width: 25px;
+  height: 25px;
+}
+
+/* ! -------------------------------------------
+    * Calculator Keys/Buttons - Layout (except top row)
+ ! ------------------------------------------- */
+
+#key-grid {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.num-keys {
+  grid-column: 1/4;
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(3, 1fr);
+  gap: 15px;
+}
+
+.opr-keys {
+  grid-column: 4/5;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 15px;
+}

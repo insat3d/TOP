@@ -1,0 +1,14 @@
+{
+  "name": "v2",
+  "version": "1.0.0",
+  "description": "1. I can either click or type the equation.        1. I should be able to enter **numbers**, **decimal** and **operators** (+,-,*,/) to create the equation        2. When I press (**Enter** key or **=**), I should get the result of the equation        3. When I press the **Backspace** key or **C**, the last character entered should be deleted.        4. When I press the **Esc** key or **AC**, the calculator should reset.        5. No other keys are allowed     2. An equation should always start with either a number or a negative unary operator.     3. There can be only one decimal point in a number.     4. There can be only one result operation of an equation. Result is calculated when I press = or *Enter* key     5. When I enter two numbers with an operator, I should get the appropriate result        1. 2+5=7        2. 5-1=6        3. 4*5=20        4. 9/3=3     6. When I enter an invalid operation, show the message \"Bad Expression\"        1. 9/0= Bad Expression        2. 0/0= Bad Expression     7.",
+  "main": "calc.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "decimal.js": "^10.2.1"
+  }
+}
