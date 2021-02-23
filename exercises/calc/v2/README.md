@@ -1,4 +1,9 @@
-# Test cases
+# Basic Calculator
+
+- Assignment from The Odin Project
+- Front-end design from [BigsonDev](https://bigsondev.com/projects/calculator-app-project/)
+
+## Test cases
 
     1. I can either click or type the equation.
        1. I should be able to enter **numbers**, **decimal** and **operators** (+,-,*,/) to create the equation
@@ -18,32 +23,37 @@
        1. 9/0= Bad Expression
        2. 0/0= Bad Expression
        3.
-    7.
+    7. When I enter a number with a percentage symbol, the following logic is used:
+       1. a+b% = a * (1+b/100)
+       2. a%+b = (a/100)+b
+       3. a%+b%=(a/100)*(1+b/100)
+       4. a*b% = a * (b/100)
+       5. a%*b = (a/100) * b
+       6. a%*b% = (a/100)*(b/100)
 
-# Flow
+## Validations
 
-    1. On page load, reset everything through *AllClear*
-    2. User enters a number and then an operator followed by another number.
-    3.
-
-# Validations
-
-<!-- TODO  -->
-
-    1. An operator must have 2 numbers except if it is a unary operator (+ or -) then it should have one number following the operator.
+    1. An operator must have 2 numbers except if it is a unary operator (- or %).
     2. When I press =/result key, display the answer in dispLarge and the entire equation on dispSmall.
-       - When I press any other number, start a new equation by calling *AllClear* and then display number being entered.
-    3. For all exceptions, set dispLarge to "Bad Expression" and dispSmall to show the bad expression/equation.
-    4. Only one decimal in a number.
-    5. Only one equal to in an equation
+    3. Only one decimal in a number.
+    4. Only one equal to in an equation.
+    5. If a malformed expression or incomplete expression is entered, show error message.
+       1. Error cases: stray decimal e.g. "10."
+       2. Divide by zero
+       3. Operator without 2 numbers
 
-<!-- TO DONE -->
+## Concepts Learned
 
-# Functions
+- Data attributes
+- Closest (DOM manipulation)
+- Using inline SVG
+- Using jest to test
+- TO LEARN: How to test with UI interactions
 
-    1. init
-    2. addListeners
-    3.
-    4. allClear
-    5. clear
-    6.
+## Pending
+
+- PEDMAS/BODMAS rule - Calculator currently evaluates left to right
+- Error handling for large numbers
+- Switching between Light mode & Dark mode
+- Split js file into helper js scripts (import/require statements don't work)
+-
