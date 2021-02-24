@@ -1,10 +1,20 @@
 # Basic Calculator
-
 - Assignment from The Odin Project
 - Front-end design from [BigsonDev](https://bigsondev.com/projects/calculator-app-project/)
 
-## Test cases
 
+## Concepts Learned/Used
+- Regex (capture and substitute)
+- Data attributes
+- Using external library (decimal.js)
+- Closest (DOM manipulation)
+- Using inline SVG
+- Enabling dark mode
+- Using jest to test
+- TO LEARN: How to test with UI interactions
+
+
+## Requirements & Test cases
     1. I can either click or type the equation.
        1. I should be able to enter **numbers**, **decimal** and **operators** (+,-,*,/) to create the equation
        2. When I press (**Enter** key or **=**), I should get the result of the equation
@@ -30,8 +40,8 @@
        5. a%*b = (a/100) * b
        6. a%*b% = (a/100)*(b/100)
 
-## Validations
 
+## Validations
     1. An operator must have 2 numbers except if it is a unary operator (- or %).
     2. When I press =/result key, display the answer in dispLarge and the entire equation on dispSmall.
     3. Remove leading zeros
@@ -42,19 +52,8 @@
        2. Divide by zero
        3. Operator without 2 numbers
 
-## Concepts Learned/Used
-
-- Regex (capture and substitute)
-- Data attributes
-- Using external library (decimal.js)
-- Closest (DOM manipulation)
-- Using inline SVG
-- Enabling dark mode
-- Using jest to test
-- TO LEARN: How to test with UI interactions
 
 ## Pending
-
 - PEDMAS/BODMAS rule - Calculator currently evaluates left to right
 - Error handling for large numbers
 - Split js file into helper js scripts (import/require statements don't work)
