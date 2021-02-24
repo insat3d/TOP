@@ -57,5 +57,4 @@
 
 - PEDMAS/BODMAS rule - Calculator currently evaluates left to right
 - Error handling for large numbers
-- Switching between Light mode & Dark mode
 - Split js file into helper js scripts (import/require statements don't work)
