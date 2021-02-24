@@ -19,10 +19,14 @@
        2. 5-1=4
        3. 4*5=20
        4. 9/3=3
+<<<<<<< HEAD
     6. When I enter an invalid operation, show the message "Bad Expression"
        1. 9/0= Bad Expression
        2. 0/0= Bad Expression
     7. When I enter a number with a percentage symbol, the following logic is used:
+=======
+    6. When I enter a number with a percentage symbol, the following logic is used:
+>>>>>>> fd2dbfed606fa057475f843be00e6957ecc014ab
        1. a+b% = a * (1+b/100)
        2. a%+b = (a/100)+b
        3. a%+b%=(a/100)*(1+b/100)
@@ -37,14 +41,14 @@
     3. Remove leading zeros
     4. Only one decimal in a number.
     5. Only one equal to in an equation.
-    6. If a malformed expression or incomplete expression is entered, show error message.
-       1. Error cases: stray decimal e.g. "10."
+    6. If a malformed expression or incomplete expression is entered, show error message. e.g:
+       1. Stray decimal e.g. "10."
        2. Divide by zero
        3. Operator without 2 numbers
 
 ## Concepts Learned/Used
 
-- Regex
+- Regex (capture and substitute)
 - Data attributes
 - Using external library (decimal.js)
 - Closest (DOM manipulation)
