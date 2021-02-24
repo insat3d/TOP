@@ -22,7 +22,6 @@
     6. When I enter an invalid operation, show the message "Bad Expression"
        1. 9/0= Bad Expression
        2. 0/0= Bad Expression
-       3.
     7. When I enter a number with a percentage symbol, the following logic is used:
        1. a+b% = a * (1+b/100)
        2. a%+b = (a/100)+b
@@ -50,6 +49,7 @@
 - Using external library (decimal.js)
 - Closest (DOM manipulation)
 - Using inline SVG
+- Enabling dark mode
 - Using jest to test
 - TO LEARN: How to test with UI interactions
 
@@ -59,4 +59,3 @@
 - Error handling for large numbers
 - Switching between Light mode & Dark mode
 - Split js file into helper js scripts (import/require statements don't work)
--

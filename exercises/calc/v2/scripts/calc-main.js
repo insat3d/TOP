@@ -272,3 +272,21 @@ function dispMsgBox(text, duration = 3) {
   // After 'duration' seconds, remove the show class from DIV
   snackbar = setTimeout(() => toast.classList.remove('show'), duration * 1000);
 }
+
+// ! -------------------------------------------
+// * Toogle Light mode Dark mode
+// ! -------------------------------------------
+let btnLightMode = document.querySelector('#light-mode');
+let modeSun = document.querySelector('.sun');
+let modeMoon = document.querySelector('.moon');
+btnLightMode.addEventListener('click', toggleLightMode);
+
+function toggleLightMode() {
+  modeMoon.classList.toggle('toggleDarkMode');
+  modeSun.classList.toggle('toggleDarkMode');
+  if (modeSun.classList.toString().includes('toggleDarkMode')) {
+    document.documentElement.setAttribute('data-mode', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-mode', 'light');
+  }
+}

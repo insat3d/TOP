@@ -9,6 +9,7 @@ body {
   height: 0;
   padding: 0;
   width: 100%;
+  box-sizing: border-box;
 }
 
 body > * {
@@ -26,6 +27,60 @@ body > * {
   }
 }
 
+@media only screen and (min-height: 1024px) {
+  body {
+    background-size: auto;
+  }
+}
+
+/* ! -------------------------------------------
+    * Color variables for toggling light/dark mode
+ ! ------------------------------------------- */
+:root {
+  --appBgColor: #fff;
+  --appTxtColor: #fff;
+  --toastBgColor: #333;
+  --toastTxtColor: #fff;
+
+  --accentColor: #4f79dc;
+
+  --displayBgColor: #ececec;
+  --displayTxtColor: #707070;
+
+  --topRowBgColor: #d2d2d2;
+  --numKeyTxtColor: #707070;
+  --oprKeyBgColor: #b9d6e3;
+}
+
+[data-mode='dark']{
+  --appBgColor: #1d1d1d;
+  --appTxtColor: #fff;
+  --toastBgColor: #fff;
+  --toastTxtColor: #333;
+
+  --accentColor: #0048f2;
+
+  --displayBgColor: #222;
+  --displayTxtColor: #707070;
+
+  --topRowBgColor: #313131;
+  --numKeyTxtColor: #707070;
+  --oprKeyBgColor: #4f79dc;
+}
+
+#light-mode > .sun {
+  fill: #f78503;
+  stroke: none;
+}
+
+#light-mode > .moon {
+  fill: #ececec;
+  stroke: none;
+}
+
+.toggleDarkMode {
+  display: none;
+}
 /* ! -------------------------------------------
     * Calculator Frame
  ! ------------------------------------------- */
@@ -39,12 +94,11 @@ body > * {
 #calc-frame {
   top: 51px;
   left: 501px;
-  width: 364px;
-  height: 666px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 14px #00000029;
+  width: 344px;
+  height: 630px;
+  background: var(--appBgColor) 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 14px var(--appBgColor)
   border-radius: 4px;
-  opacity: 1;
 }
 
 /* ! -------------------------------------------
@@ -56,10 +110,9 @@ body > * {
   justify-content: space-between;
   align-items: center;
 
-  width: 364px;
+  width: 344px;
   height: 50px;
-  background: #ffffff 0% 0% no-repeat padding-box;
-  opacity: 1;
+  background: var(--appBgColor) 0% 0% no-repeat padding-box;
 
   box-sizing: border-box;
   padding: 0px 24px;
@@ -68,18 +121,12 @@ body > * {
 #app-name-box {
   width: 105px;
   height: 28px;
-  background: #4f79dc 0% 0% no-repeat padding-box;
+  background: var(--accentColor) 0% 0% no-repeat padding-box;
   border-radius: 14px;
-  opacity: 1;
 
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#dark-mode > .a {
-  fill: #8c8c8c;
-  stroke: none;
 }
 
 #app-name {
@@ -88,19 +135,17 @@ body > * {
   text-align: left;
   font: normal normal normal 16px/19px Lato;
   letter-spacing: 0px;
-  color: #ffffff;
-  opacity: 1;
+  color: var(--appTxtColor);
 }
 
 /* ! -------------------------------------------
     * Calculator Display
  ! ------------------------------------------- */
 #calc-display {
-  width: 364px;
-  height: 170px;
-  background: #ececec 0% 0% no-repeat padding-box;
+  width: 344px;
+  height: 150px;
+  background: var(--displayBgColor) 0% 0% no-repeat padding-box;
   border-radius: 4px 4px 0px 0px;
-  opacity: 1;
 }
 
 .displayLines {
@@ -119,8 +164,8 @@ body > * {
   text-align: left;
   font: normal normal normal 60px/72px Lato;
   letter-spacing: 0px;
-  color: #707070;
-  opacity: 1;
+  color: var(--displayTxtColor);
+
   /* padding-bottom: 12px; */
 }
 
@@ -129,8 +174,8 @@ body > * {
   text-align: left;
   font: normal normal normal 24px/32px Lato;
   letter-spacing: 0px;
-  color: #707070;
-  opacity: 1;
+  color: var(--displayTxtColor);
+
   padding-bottom: 12px;
 }
 
@@ -143,11 +188,11 @@ body > * {
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 250px; /* Set a default minimum width */
   margin-left: -125px; /* Divide value of min-width by 2 */
-  background-color: #333; /* Black background color */
-  color: #fff; /* White text color */
-  text-align: center; /* Centered text */
-  border-radius: 10px; /* Rounded borders */
-  padding: 16px; /* Padding */
+  background-color: var(--toastBgColor);
+  color: var(--toastTxtColor);
+  text-align: center;
+  border-radius: 10px;
+  padding: 16px;
   position: fixed; /* Sit on top of the screen */
   z-index: 1; /* Add a z-index if needed */
   left: 50%; /* Center the snackbar */
@@ -167,44 +212,36 @@ body > * {
 @-webkit-keyframes fadein {
   from {
     bottom: 0;
-    opacity: 0;
   }
   to {
     bottom: 30px;
-    opacity: 1;
   }
 }
 
 @keyframes fadein {
   from {
     bottom: 0;
-    opacity: 0;
   }
   to {
     bottom: 30px;
-    opacity: 1;
   }
 }
 
 @-webkit-keyframes fadeout {
   from {
     bottom: 30px;
-    opacity: 1;
   }
   to {
     bottom: 0;
-    opacity: 0;
   }
 }
 
 @keyframes fadeout {
   from {
     bottom: 30px;
-    opacity: 1;
   }
   to {
     bottom: 0;
-    opacity: 0;
   }
 }
 
@@ -213,28 +250,18 @@ body > * {
  ! ------------------------------------------- */
 .btn {
   border-radius: 50%;
-  user-select: none;
-  -khtml-user-select: none;
-  -o-user-select: none;
-  -moz-user-select: -moz-none;
-  -webkit-user-select: none;
 
   display: inline-block;
   white-space: nowrap;
   -ms-touch-action: manipulation;
   touch-action: manipulation;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   background-image: none;
   border: 1px solid transparent;
   text-decoration: none;
 
-  /* color: #333; */
-  background-color: #fff;
-  border-color: #ccc;
+  background-color: var(--appBgColor);
+  border-color: var(--displayBgColor);
 }
 
 .btn-dark > span {
@@ -243,8 +270,7 @@ body > * {
   text-align: left;
   font: normal normal normal 34px/41px Lato;
   letter-spacing: 0px;
-  color: #707070;
-  opacity: 1;
+  color: var(--numKeyTxtColor);
 }
 
 .btn-light > span {
@@ -253,8 +279,7 @@ body > * {
   text-align: left;
   font: normal normal normal 28px/34px Lato;
   letter-spacing: 0px;
-  color: #ffffff;
-  opacity: 1;
+  color: var(--appTxtColor);
 }
 
 /* ! -------------------------------------------
@@ -264,8 +289,7 @@ body > * {
 .btn-top-row {
   width: 64px;
   height: 64px;
-  background: #d2d2d2 0% 0% no-repeat padding-box;
-  opacity: 1;
+  background: var(--topRowBgColor) 0% 0% no-repeat padding-box;
 
   display: flex;
   justify-content: center;
@@ -276,8 +300,8 @@ body > * {
   text-align: left;
   font: normal normal normal 30px/36px Lato;
   letter-spacing: 0px;
-  color: #ffffff;
-  opacity: 1;
+  color: var(--appTxtColor);
+
   line-height: 2rem;
 }
 
@@ -287,8 +311,7 @@ body > * {
 .btn-opr {
   width: 64px;
   height: 64px;
-  background: #b9d6e3 0% 0% no-repeat padding-box;
-  opacity: 1;
+  background: var(--oprKeyBgColor) 0% 0% no-repeat padding-box;
 
   display: flex;
   justify-content: center;
@@ -301,16 +324,15 @@ body > * {
   text-align: left;
   font: normal normal normal 40px/48px Lato;
   letter-spacing: 0px;
-  color: #ffffff;
-  opacity: 1;
+  color: var(--appTxtColor);
+
   padding-right: 2px;
 }
 
 .btn-num {
   width: 64px;
   height: 64px;
-  background: #fff 0% 0% no-repeat padding-box;
-  opacity: 1;
+  background: var(--appBgColor) 0% 0% no-repeat padding-box;
 
   display: flex;
   justify-content: center;
@@ -323,8 +345,7 @@ body > * {
   text-align: center;
   font: normal normal normal 34px/41px Lato;
   letter-spacing: 0px;
-  color: #707070;
-  opacity: 1;
+  color: var(--numKeyTxtColor);
 }
 
 /* ! -------------------------------------------
@@ -333,12 +354,12 @@ body > * {
 #btn-result {
   width: 64px;
   height: 64px;
-  background: #4f79dc 0% 0% no-repeat padding-box;
-  opacity: 1;
+  background: var(--accentColor) 0% 0% no-repeat padding-box;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 #btn-decimal {
@@ -348,7 +369,7 @@ body > * {
 
 .Capa_1 {
   /* SVG Icons */
-  fill: #fff;
+  fill: var(--appTxtColor);
   width: 25px;
   height: 25px;
 }
