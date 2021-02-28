@@ -11,85 +11,21 @@ let btnPlusMinus = document.querySelector('#plus-minus');
 
 let btnNumberOperators = document.querySelectorAll('.btn-numopr');
 
-init();
-
-function init() {
-  allClear();
-}
-
 // ! -------------------------------------------
-// * Set up event listeners to all buttons
+// * Helper functions to validate  user input
 // ! -------------------------------------------
 
-function enableButtons() {
-  btnAllClear.addEventListener('click', allClear);
-  btnBackspace.addEventListener('click', backspace);
-
-  btnNumberOperators.forEach((key) =>
-    key.addEventListener('click', isValidInput)
-  );
-  document.addEventListener('keyup', isValidInput);
-  btnPlusMinus.addEventListener('click', toggleMinus);
-}
-
-function disableButtons() {
-  btnNumberOperators.forEach((key) =>
-    key.removeEventListener('click', isValidInput)
-  );
-  document.removeEventListener('keyup', isValidInput);
-  btnPlusMinus.removeEventListener('click', toggleMinus);
-}
-
-// ! -------------------------------------------
-// * Hanlding All Clear (AC) and Backspace (C) buttons
-// ! -------------------------------------------
-
-function allClear() {
-  dispLarge.textContent = 0;
-  dispSmall.textContent = '';
-  equation = [];
-  enableButtons();
-}
-
-function backspace() {
-  let dispLargeText = dispLarge.textContent.slice(0, -1);
-  dispLarge.textContent = dispLargeText === '-' ? '' : dispLargeText;
-}
-
-// ! -------------------------------------------
-// * Helper functions to validate user input
-// ! -------------------------------------------
-
-function isValidInput(userEvent) {
-  const keyEntered =
-    userEvent.type === 'keyup'
-      ? userEvent.key
-      : Object.values(userEvent.target.closest('div').dataset)[0];
-
-  if (isValidNumber(keyEntered) || keyEntered === '.' || keyEntered === '%') {
-    digitClicked(keyEntered);
-  } else if (isValidOpr(keyEntered)) {
-    oprClicked(keyEntered);
-  } else if (keyEntered === '=' || keyEntered === 'Enter') {
-    showResults();
-  } else if (keyEntered === 'Escape') {
-    allClear();
-  } else if (keyEntered === 'Backspace') {
-    backspace();
-  }
-}
-
-function isValidOpr(opr) {
+const isValidOpr = (opr) => {
   const operators = ['+', '-', 'x', '*', '/'];
   return operators.includes(opr);
-}
+};
 
-function isValidNumber(num) {
+const isValidNumber = (num) => {
   const isNumber = /^-?\d*\.?\d+%?$/g;
   return !!num.toString().match(isNumber);
-}
+};
 
-function toggleMinus() {
+const toggleMinus = () => {
   // toggle minus sign on the number in dispLarge (prefix only)
   // works only in click event - not attached to a keyboard event
   const dispLargeText = dispLarge.textContent;
@@ -99,9 +35,9 @@ function toggleMinus() {
   dispLarge.textContent = dispLargeText.includes('-')
     ? dispLargeText.replace(/-/, '')
     : '-' + dispLargeText;
-}
+};
 
-function togglePercent() {
+const togglePercent = () => {
   // toggle minus sign on the number in dispLarge (prefix only)
   // works only in click event - not attached to a keyboard event
   const dispLargeText = dispLarge.textContent;
@@ -111,13 +47,103 @@ function togglePercent() {
   dispLarge.textContent = dispLargeText.includes('%')
     ? dispLargeText.replace(/%/, '')
     : dispLargeText + '%';
-}
+};
 
 // ! -------------------------------------------
-// * Functions handling digits and operators
+// * Building and Executing Equation
 // ! -------------------------------------------
 
-function digitClicked(clickedNum) {
+const pushToEquation = () => {
+  // "Equation" is the equation that gets executed when the user asks for a result
+  equation.push(dispLarge.textContent.replace('x', '*'));
+  dispSmall.textContent = [...equation].toString().replace(/,/g, '');
+  dispLarge.textContent = '';
+};
+
+const percentHandling = (num1, opr, num2) => {
+  // if num1 is %, replace as num1/100
+  if (num1.toString().includes('%')) {
+    num1 = Number(num1.toString().replace('%', '')) / 100;
+  }
+
+  // if num2 is %, apply the opr to num2/100
+  if (num2.toString().includes('%')) {
+    num2 = Number(num2.toString().replace('%', '')) / 100;
+    num2 = executeEquation(1, opr, num2);
+    opr = 'x';
+  }
+
+  return { num1, opr, num2 };
+};
+
+// TODO Add exception handling
+const executeEquation = (num1, opr, num2) => {
+  // check if one of the numbers is a %
+  ({ num1, opr, num2 } = percentHandling(num1, opr, num2));
+
+  if (isNaN(num1) || isNaN(num2)) return badExpression;
+
+  Decimal.set({ precision: 9, rounding: 5 });
+
+  const x = new Decimal(num1);
+  const y = new Decimal(num2);
+  let result;
+
+  try {
+    switch (opr) {
+      case '+':
+        result = x.plus(y);
+        break;
+      case '-':
+        result = x.minus(y);
+        break;
+      case 'x':
+        result = x.times(y);
+        break;
+      case '*':
+        result = x.times(y);
+        break;
+      case '*':
+        result = x.times(y);
+        break;
+      case '/':
+        result = x.dividedBy(y);
+    }
+  } catch (e) {
+    console.error(`Error in Exec Equation: ${e.message}`);
+  }
+  return result.isFinite() ? Number(result) : badExpression;
+};
+
+const reduceEq = (equation, opr) => {
+  // reduce equation by traversing left to right
+  // for each instance of opr,
+  // execute the equation by taking the number preceeding and following the opr
+  let index = equation.indexOf(opr);
+  while (index > 0) {
+    equation.splice(
+      index - 1,
+      3,
+      executeEquation(equation[index - 1], equation[index], equation[index + 1])
+    );
+    index = equation.indexOf(opr);
+  }
+  return equation;
+};
+
+const processEquation = (equation) => {
+  // processes the equation following the BODMAS rule (DMAS part only).
+  // priority of operators is defined in the operators string
+  const operators = ['/', '*', 'x', '+', '-'];
+  equation = operators.reduce((acc, cur) => reduceEq(acc, cur), equation);
+  return equation[0];
+};
+
+// ! -------------------------------------------
+// * Handling digits and operators
+// ! -------------------------------------------
+
+const digitClicked = (clickedNum) => {
   let dispLargeText = dispLarge.textContent;
 
   // Logic: starting new number or adding digits to existing number
@@ -160,9 +186,9 @@ function digitClicked(clickedNum) {
 
   dispLarge.textContent =
     dispLargeText.replace(leadingZeros, prefix) + clickedNum + suffix;
-}
+};
 
-function oprClicked(clickedOpr) {
+const oprClicked = (clickedOpr) => {
   const dispLargeText = dispLarge.textContent;
 
   // Validation: disable oprClicked till a valid number is entered
@@ -171,9 +197,9 @@ function oprClicked(clickedOpr) {
   if (isValidNumber(dispLargeText)) pushToEquation();
 
   dispLarge.textContent = clickedOpr;
-}
+};
 
-function showResults() {
+const showResults = () => {
   if (
     isValidOpr(dispLarge.textContent) ||
     !isValidNumber(dispLarge.textContent)
@@ -183,7 +209,7 @@ function showResults() {
   }
 
   pushToEquation();
-  const result = processEquation();
+  const result = processEquation(equation);
   if (result === badExpression) {
     dispMsgBox(badExpression);
     disableButtons();
@@ -191,77 +217,32 @@ function showResults() {
     dispLarge.textContent = result;
     equation = [];
   }
-}
+};
 
-// ! -------------------------------------------
-// * Building and Executing Equation
-// ! -------------------------------------------
+const isValidInput = (userEvent) => {
+  const keyEntered =
+    userEvent.type === 'keyup'
+      ? userEvent.key
+      : Object.values(userEvent.target.closest('div').dataset)[0];
 
-function pushToEquation() {
-  // "Equation" is the equation that gets executed when the user asks for a result
-  equation.push(dispLarge.textContent.replace('x', '*'));
-  dispSmall.textContent = [...equation].toString().replace(/,/g, '');
-  dispLarge.textContent = '';
-}
-
-function processEquation() {
-  let opr = '';
-  let answer = equation.reduce((acc, cur) => {
-    if (acc === badExpression) return badExpression;
-    if (isValidOpr(cur)) {
-      opr = cur;
-    } else {
-      if (acc.toString().includes('%')) {
-        acc = Number(acc.toString().replace('%', '')) / 100;
-      }
-
-      if (cur.toString().includes('%')) {
-        cur = Number(cur.toString().replace('%', '')) / 100;
-        cur = executeEquation(1, opr, cur);
-        opr = 'x';
-      }
-      acc = executeEquation(acc, opr, cur);
-    }
-    return acc;
-  });
-  return answer;
-}
-
-function executeEquation(num1, opr, num2) {
-  if (isNaN(num1) || isNaN(num2)) return badExpression;
-  Decimal.set({ precision: 7, rounding: 5 });
-
-  const x = new Decimal(num1);
-  const y = new Decimal(num2);
-  let result;
-  switch (opr) {
-    case '+':
-      result = x.plus(y);
-      break;
-    case '-':
-      result = x.minus(y);
-      break;
-    case 'x':
-      result = x.times(y);
-      break;
-    case '*':
-      result = x.times(y);
-      break;
-    case '*':
-      result = x.times(y);
-      break;
-    case '/':
-      result = x.dividedBy(y);
+  if (isValidNumber(keyEntered) || keyEntered === '.' || keyEntered === '%') {
+    digitClicked(keyEntered);
+  } else if (isValidOpr(keyEntered)) {
+    oprClicked(keyEntered);
+  } else if (keyEntered === '=' || keyEntered === 'Enter') {
+    showResults();
+  } else if (keyEntered === 'Escape') {
+    allClear();
+  } else if (keyEntered === 'Backspace') {
+    backspace();
   }
-
-  return result.isFinite() ? Number(result) : badExpression;
-}
+};
 
 // ! -------------------------------------------
 // * Error message handling
 // TODO Handle results that are large numbers
 // ! -------------------------------------------
-function dispMsgBox(text, duration = 3) {
+const dispMsgBox = (text, duration = 3) => {
   // Toast box to pop up messages to the user
   let toast = document.querySelector('#snackbar');
   clearTimeout(snackbar);
@@ -271,7 +252,7 @@ function dispMsgBox(text, duration = 3) {
 
   // After 'duration' seconds, remove the show class from DIV
   snackbar = setTimeout(() => toast.classList.remove('show'), duration * 1000);
-}
+};
 
 // ! -------------------------------------------
 // * Toogle Light mode Dark mode
@@ -279,9 +260,8 @@ function dispMsgBox(text, duration = 3) {
 let btnLightMode = document.querySelector('#light-mode');
 let modeSun = document.querySelector('.sun');
 let modeMoon = document.querySelector('.moon');
-btnLightMode.addEventListener('click', toggleLightMode);
 
-function toggleLightMode() {
+const toggleLightMode = () => {
   modeMoon.classList.toggle('toggleDarkMode');
   modeSun.classList.toggle('toggleDarkMode');
   if (modeSun.classList.toString().includes('toggleDarkMode')) {
@@ -289,4 +269,54 @@ function toggleLightMode() {
   } else {
     document.documentElement.setAttribute('data-mode', 'light');
   }
-}
+};
+
+// ! -------------------------------------------
+// * Set up event listeners to all buttons
+// ! -------------------------------------------
+
+const enableButtons = () => {
+  btnAllClear.addEventListener('click', allClear);
+  btnBackspace.addEventListener('click', backspace);
+
+  btnNumberOperators.forEach((key) =>
+    key.addEventListener('click', isValidInput)
+  );
+  document.addEventListener('keyup', isValidInput);
+  btnPlusMinus.addEventListener('click', toggleMinus);
+  btnLightMode.addEventListener('click', toggleLightMode);
+};
+
+const disableButtons = () => {
+  btnNumberOperators.forEach((key) =>
+    key.removeEventListener('click', isValidInput)
+  );
+  document.removeEventListener('keyup', isValidInput);
+  btnPlusMinus.removeEventListener('click', toggleMinus);
+};
+
+// ! -------------------------------------------
+// * Hanlding All Clear (AC) and Backspace (C) buttons
+// ! -------------------------------------------
+
+const allClear = () => {
+  dispLarge.textContent = 0;
+  dispSmall.textContent = '';
+  equation = [];
+  enableButtons();
+};
+
+const backspace = () => {
+  let dispLargeText = dispLarge.textContent.slice(0, -1);
+  dispLarge.textContent = dispLargeText === '-' ? '' : dispLargeText;
+};
+
+// ! -------------------------------------------
+// * Load calculator logic
+// ! -------------------------------------------
+
+const init = () => {
+  allClear();
+};
+
+init();

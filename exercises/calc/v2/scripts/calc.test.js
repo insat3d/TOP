@@ -2,10 +2,16 @@ const calc = require('./calc');
 
 const badExpression = 'Bad Expression';
 
+test('Test for BODMAS rule', () => {
+  expect(calc.processEquation([7, 'x', 4, '/', 2, '/', 2])).toBe(7);
+  expect(calc.processEquation([7, 'x', 4, '/', 2, '/', 2, '+', 2])).toBe(9);
+  expect(calc.processEquation([7, '-', 4, '/', 2, '+', 2, '/', 2])).toBe(4);
+});
+
 test('Invokes execute equation by passing 2 num and 1 opr', () => {
-  expect(calc.processEquation([7, 'x', 4, '-', 3, '/', 2])).toBe(12.5);
+  expect(calc.processEquation([7, 'x', 4, '-', 3, '/', 2])).toBe(26.5);
   expect(calc.processEquation([7, 'x', 4, '/', 0, '/', 2])).toBe(badExpression);
-  expect(calc.processEquation([7, 'x', 4, '-', 3, '/', 2.5])).toBe(10);
+  expect(calc.processEquation([7, 'x', 4, '-', 3, '/', 2.5])).toBe(26.8);
 });
 
 test('Takes positive 2 numbers and returns result', () => {
