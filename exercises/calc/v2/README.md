@@ -3,7 +3,18 @@
 - Assignment from The Odin Project
 - Front-end design from [BigsonDev](https://bigsondev.com/projects/calculator-app-project/)
 
-## Test cases
+## Concepts Learned/Used
+
+- Regex (capture and substitute)
+- Data attributes
+- Using external library (decimal.js)
+- Closest (DOM manipulation)
+- Using inline SVG
+- Enabling dark mode
+- Using jest to test
+- TO LEARN: How to test with UI interactions
+
+## Requirements & Test cases
 
     1. I can either click or type the equation.
        1. I should be able to enter **numbers**, **decimal** and **operators** (+,-,*,/) to create the equation
