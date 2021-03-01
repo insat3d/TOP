@@ -76,14 +76,13 @@ const percentHandling = (num1, opr, num2) => {
   return { num1, opr, num2 };
 };
 
-// TODO Add exception handling
 const executeEquation = (num1, opr, num2) => {
   // check if one of the numbers is a %
   ({ num1, opr, num2 } = percentHandling(num1, opr, num2));
 
   if (isNaN(num1) || isNaN(num2)) return badExpression;
 
-  Decimal.set({ precision: 9, rounding: 5 });
+  Decimal.set({ precision: 8, rounding: 7 });
 
   const x = new Decimal(num1);
   const y = new Decimal(num2);
@@ -109,6 +108,7 @@ const executeEquation = (num1, opr, num2) => {
       case '/':
         result = x.dividedBy(y);
     }
+    // result = result.toDecimalPlaces(8, Decimal.ROUND_HALF_CEIL);
   } catch (e) {
     console.error(`Error in Exec Equation: ${e.message}`);
   }
@@ -209,9 +209,13 @@ const showResults = () => {
   }
 
   pushToEquation();
+
   const result = processEquation(equation);
   if (result === badExpression) {
     dispMsgBox(badExpression);
+    disableButtons();
+  } else if (result.toString().length > 12) {
+    dispMsgBox('Result has too many digits (Click AC to resume)');
     disableButtons();
   } else {
     dispLarge.textContent = result;
@@ -240,7 +244,6 @@ const isValidInput = (userEvent) => {
 
 // ! -------------------------------------------
 // * Error message handling
-// TODO Handle results that are large numbers
 // ! -------------------------------------------
 const dispMsgBox = (text, duration = 3) => {
   // Toast box to pop up messages to the user

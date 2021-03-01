@@ -9,6 +9,7 @@
 - Data attributes
 - Using external library (decimal.js)
 - Closest (DOM manipulation)
+- Object destructuring to return multiple values
 - Using inline SVG
 - Enabling dark mode
 - Using jest to test
@@ -54,19 +55,7 @@
        2. Divide by zero
        3. Operator without 2 numbers
 
-## Concepts Learned/Used
-
-- Regex (capture and substitute)
-- Data attributes
-- Using external library (decimal.js)
-- Closest (DOM manipulation)
-- Object destructuring to return multiple values
-- Using inline SVG
-- Enabling dark mode
-- Using jest to test
-- TO LEARN: How to test with UI interactions
-
 ## Pending
 
-- Error handling for large numbers
 - Split js file into helper js scripts (import/require statements don't work)
+- RWD

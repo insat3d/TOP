@@ -74,6 +74,11 @@ body > * {
   --oprKeyBgColor: #4f79dc;
 }
 
+#favico {
+  stroke: blue;
+  fill: blue;
+}
+
 #light-mode > .sun {
   fill: #f78503;
   stroke: none;
@@ -141,7 +146,6 @@ body > * {
   height: 1 rem;
   text-align: left;
   font: normal normal normal 16px/19px 'Nova Square';
-  /* font-family: ; */
   letter-spacing: 0px;
   color: var(--appTxtColor);
 }
@@ -150,7 +154,6 @@ body > * {
     * Calculator Display
  ! ------------------------------------------- */
 #calc-display {
-  /* width: 344px; */
   height: 150px;
   background: var(--displayBgColor) 0% 0% no-repeat padding-box;
   border-radius: 4px 4px 0px 0px;
@@ -163,7 +166,7 @@ body > * {
   justify-content: space-evenly;
   align-items: flex-end;
 
-  padding: 24px 24px;
+  padding: 24px;
   box-sizing: border-box;
 }
 
@@ -192,8 +195,6 @@ body > * {
 /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
   visibility: hidden; /* Hidden by default. Visible on click */
-  /* min-width: 300px; /* Set a default minimum width */
-  /* margin-left: 150px; /* Divide value of min-width by 2 */
   min-width: 250px;
   background-color: var(--toastBgColor);
   color: var(--toastTxtColor);
@@ -202,7 +203,6 @@ body > * {
   padding: 16px;
   position: fixed; /* Sit on top of the screen */
   z-index: 1; /* Add a z-index if needed */
-  /*left: 50%; /* Center the snackbar */
   bottom: 30px; /* 30px from the bottom */
 }
 
@@ -281,7 +281,6 @@ body > * {
 }
 
 .btn-light > span {
-  /* width: 22px; */
   height: 34px;
   text-align: left;
   font: normal normal normal 28px/34px Lato;
@@ -368,9 +367,12 @@ body > * {
   align-items: center;
 }
 
+#btn-result > span {
+  padding: 1px 2px 0 0;
+}
+
 #btn-decimal {
   padding-bottom: 20px;
-  /* padding-left: 12px; */
 }
 
 .Capa_1 {
